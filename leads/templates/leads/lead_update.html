@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{{form.media}}
+<title>
+    {% block title %}
+      update {{lead.name}}
+    {% endblock title %}
+  </title>
+  <div class="well">
+  <div class="row justify-content-center grid">
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        </div>
+        <form action="" method="post">
+          <div class="row">
+          {% csrf_token %}
+          <div class="form-group col-sm-4 col-md-6">
+            {{ form.name.label_tag }}
+            {% render_field form.name class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-6">
+            {{ form.category.label_tag }}
+            {% render_field form.category class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-6">
+            {{ form.phone.label_tag }}
+            {% render_field form.phone class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-6">
+            {{ form.source.label_tag }}
+            {% render_field form.source class="form-control" %}
+          </div>
+          <div class="form-group col-sm-4 col-md-6">
+            {{ form.email.label_tag }}
+            {% render_field form.email class="form-control" %}
+          </div>
+            <div class="form-group col-sm-4 col-md-6">
+              {{ form.task.label_tag }}
+              {% render_field form.task class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-6">
+              {{ form.user.label_tag }}
+              {% render_field form.user class="form-control" %}
+            </div>
+            <div class="form-group col-sm-4 col-md-6">
+              {{ form.deposit.label_tag }}
+              {% render_field form.deposit class="form-control" %}
+            </div>
+          </div>
+          <button style="margin-top: 10px; background-color: #0261b9; color: white;" type="submit" class="btn btn-success col-md-6"> <span class="fas fa-hdd"></span> Update lead</button>
+          </form>
+        </div>
+            <br><br>
+            <h4 class="text-muted text-left">Comments:</h4>
+                <div id="comments-list" style="height:110px;width:100%;border-radius:20px;overflow:auto;padding:10px;background-color:rgb(243, 243, 243);box-shadow: 1px 0px 18px 1px rgba(169,169,169,0.76);-webkit-box-shadow: 1px 0px 18px 1px rgba(169,169,169,0.76);-moz-box-shadow: 1px 0px 18px 1px rgba(169,169,169,0.76);">
+                  {% if not lead.comments.all %}
+                  <h5>No comments yet...</h5>
+                  {% else %}
+                  {% for comment in lead.comments.all %}
+                  <span style="padding:5px;margin:10px;background-color:#2b2b2b;border-radius:10px;color:white;-webkit-box-shadow: 0px 1px 7px 7px rgba(255,255,255,0.68);box-shadow: 0px 1px 7px 7px rgba(255,255,255,0.68);"><b>{{comment.timestamp}}</b> - <b style="color:white;">{{comment.user.first_name}} {{comment.user.last_name}}</b> <i class="fas fa-comment text-info"></i> : </span> {{comment.body}}<br/><br/>
+                  {% endfor %}
+                  {% endif %}
+                  </div>
+                  </div>
+                  <br>
+                <form action="{% url 'leads:comment' lead.id %}" method="post">
+                  {% csrf_token %}
+                  <h6 class="text-muted text-left">Add Comment:</h6>
+                  {% render_field commentform.body class="form-control" %}
+                  <br>
+                  <div class="text-muted text-center">
+                  <button type="submit" class="btn btn-primary col-md-6"> <span class="fas fa-comments"></span> Add comment</button>
+                </form>
+                 </div>
+                </div>
+             </div>
+      </div>
+    </div>
+<script>
+  $(document).ready(function() {
+
+      var d = $('#comments-list');
+      d.scrollTop(d.prop("scrollHeight"));
+  
+      });
+  </script>
+{% endblock content %}
+
+

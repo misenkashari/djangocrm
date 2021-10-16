@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+  <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{form|crispy}}
+      <button type="submit" class="btn btn-block" style="color: white; background-color: rgb(0, 112, 187);">Import</button>
+  </form>
+{% endblock content %}

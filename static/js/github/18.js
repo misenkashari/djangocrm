@@ -1,0 +1,2 @@
+System.register(["./chunk-vendor.js"],(function(){"use strict";var t,e;return{setters:[function(s){t=s._,e=s.c}],execute:function(){let s=class DelayedLoadingElement extends HTMLElement{connectedCallback(){this.showAfterMs=parseInt(this.getAttribute("data-show-after-ms")||"500"),setTimeout((()=>{this.style.display="block"}),this.showAfterMs)}};s=t([e],s)}}}));
+//# sourceMappingURL=chunk-delayed-loading-element-d5a5f755.js.map

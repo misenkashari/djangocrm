@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{{form.media}}
+{% block title %}
+  update {{user.username}}
+{% endblock title %}
+{% block content %}
+<br>
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-10 col-sm-10">
+          <h3 class="card-title">Update properties and permissions for <b class="text-info">{{user.first_name}} {{user.last_name}}</b>.</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{form|crispy}}
+        <button type="submit" class="btn btn-primary col-lg-6"><span class="fa fa-hdd" aria-hidden="true"></span> Submit</button>
+      </form>
+      <h1 style="margin-top: 10px;"><a href="/users"class="btn btn-danger col-lg-6"><span class="fa fa-undo" aria-hidden="true"></span> Back</a></h1>
+    </div>
+</div>
+{% endblock content %}
